@@ -37,3 +37,7 @@ foreach ($path in $RegistryPaths) {
         Remove-ItemProperty -Path $path -Name "*" -ErrorAction SilentlyContinue
     }
 }
+
+
+# Sobrescribe todo el espacio libre del disco C:
+cipher /w:C
