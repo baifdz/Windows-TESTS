@@ -1,6 +1,7 @@
 
 
-#Creacion de nuevo usuario para borrado del antiguo usuario
+# Creacion de nuevo usuario para borrado del antiguo usuario
+
 ```
 $Password = Read-Host -AsSecureString "Introduce la contraseña para el nuevo admin"
 New-LocalUser -Name "AdminEmpresa" -Password $Password -Description "Administrador de Respaldo"
@@ -21,37 +22,46 @@ Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -notmatch "Microsoft
 ```
 
 # Eliminar aplicaciones de la Microsoft Store para el usuario actual
+
 ```
 Get-AppxPackage | Where-Object { $_.IsFramework -eq $false } | Remove-AppxPackage
 ```
 # Borrar todas las credenciales guardadas (Web y Windows)
+
 ```
 cmdkey /list | ForEach-Object { if ($_ -match "Target: (.*)") { cmdkey /delete:$($matches[1]) } }
 ```
 
 # Borra lo que no esté bloqueado sin mostrar errores
+
 ```
 Remove-Item -Path "C:\Windows\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item -Path "$env:TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue
 ```
 
 # Nota: Para desvincular correos de Outlook/Mail, lo más efectivo es borrar la carpeta de perfil:
+
 ```
 Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Outlook" -Recurse -Force -ErrorAction SilentlyContinue
 ```
+
 # Borrar Archivos Temporales y Prefetch
+
 ```
 Remove-Item -Path "C:\Windows\Temp\*" -Recurse -Force
 Remove-Item -Path "$env:TEMP\*" -Recurse -Force
 Remove-Item -Path "C:\Windows\Prefetch\*" -Recurse -Force
 ```
+
 # Limpiar Acceso Rápido e Historial de Explorador
+
 ```
 $RecentFiles = "$env:APPDATA\Microsoft\Windows\Recent\*"
 Remove-Item -Path $RecentFiles -Recurse -Force
 ```
 
 3. Limpieza de Navegadores (Crucial)
+
 ```
 $EdgeDir = "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default"
 if (Test-Path $EdgeDir) {
@@ -60,7 +70,9 @@ if (Test-Path $EdgeDir) {
     Remove-Item -Path "$EdgeDir\Cookies" -Force -ErrorAction SilentlyContinue
 }
 ```
+
 #Script para limpiar y ocultar Recomendaciones de Inicio
+
 ```
 Write-Host "Limpiando Caché de Recomendaciones y Jump Lists..." -ForegroundColor Cyan
 
@@ -93,6 +105,7 @@ Stop-Process -Name explorer -Force
 ```
 
 # Definir las aplicaciones y las versiones de Office (16.0 es Office 365/2019/2016, 15.0 es 2013, etc.)
+
 ```
 $OfficeApps = @("Word", "Excel", "PowerPoint")
 $OfficeVersions = @("16.0", "15.0", "14.0", "12.0") 
@@ -123,6 +136,7 @@ Write-Host "Limpieza de Office completada." -ForegroundColor Cyan
 ```
 
 # Limpiar el Visor de Eventos (Logs de sistema sobre qué se ejecutó)
+
 ```
 Get-EventLog -LogName * | ForEach-Object { Clear-EventLog -LogName $_.Log }
 
@@ -139,12 +153,14 @@ foreach ($path in $RegistryPaths) {
     }
 }
 ```
+
 #regedit cleanup
-```
 
 ```
 
+```
 #network cleanup
+
 ```
 Write-Host "Iniciando limpieza de configuraciones de red..." -ForegroundColor Cyan
 
