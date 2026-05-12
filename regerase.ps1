@@ -2,14 +2,11 @@ Get-EventLog -LogName * | ForEach-Object { Clear-EventLog -LogName $_.Log } -For
 
 #Este comando hará lo siguiente:
 
-Get-EventLog -LogName *: #Obtiene todos los registros de eventos en el sistema.
-
-ForEach-Object: #Para cada registro de eventos encontrado, ejecuta el siguiente comando.
-
-Clear-EventLog -LogName $_.Log: #Limpia los registros de eventos del log que se está procesando.
+#Get-EventLog -LogName *: Obtiene todos los registros de eventos en el sistema.
+#ForEach-Object: #Para cada registro de eventos encontrado, ejecuta el siguiente comando.
+#Clear-EventLog -LogName $_.Log: Limpia los registros de eventos del log que se está procesando.
 
 #Este comando eliminará los registros de todos los logs de eventos del sistema, incluyendo los de aplicación, seguridad, y otros.
-
 
 Start-Process powershell -ArgumentList "-Command Get-EventLog -LogName * | ForEach-Object { Clear-EventLog -LogName $_.Log }" -Verb RunAs
 
