@@ -37,6 +37,8 @@ Get-NetAdapterAdvancedProperty -Name "Ethernet" | Select-Object DisplayName, Reg
 ~~~
 
 
+https://github.com/chall32/LDWin
+https://github.com/chall32/LDWin.git
 
 Step 1: Create the LLDP Registry Key and Property
 ~~~powershell
