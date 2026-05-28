@@ -58,9 +58,20 @@ Restart-NetAdapter -Name "Ethernet" -Confirm:$false
 ~~~
 
 
+This command identifies all local drives and searches them for a specific filename:
+~~~powershell
+Get-PSDrive -PSProvider FileSystem | ForEach-Object { 
+    Get-ChildItem -Path "$($_.Root)*" -Filter "filename.txt" -Recurse -ErrorAction SilentlyContinue 
+}
+~~~
 
 
 
-
+Scan all local drives for any file with "file" in the name:
+~~~
+Get-PSDrive -PSProvider FileSystem | ForEach-Object { 
+    Get-ChildItem -Path "$($_.Root)*" -Filter "*file*" -File -Recurse -ErrorAction SilentlyContinue 
+}
+~~~
 
 
