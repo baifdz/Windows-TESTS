@@ -58,7 +58,10 @@ Restart-NetAdapter -Name "Ethernet" -Confirm:$false
 ~~~
 
 
-
+Sesiones activas de usuario
+~~~powershell
+query user
+~~~
 
 Scan all local drives for any file with "video" in the name:
 ~~~
