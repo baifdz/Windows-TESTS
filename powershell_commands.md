@@ -62,8 +62,7 @@ Restart-NetAdapter -Name "Ethernet" -Confirm:$false
 
 Scan all local drives for any file with "video" in the name:
 ~~~
-Get-ChildItem -Path "C:\" -Filter "*video*" -File -Recurse -ErrorAction SilentlyContinue
-
+Get-ChildItem -Path "C:\" -Filter "*video*" -File -Recurse -ErrorAction SilentlyContinue | Select-Object -ExpandProperty FullName
 ~~~
 
 
