@@ -64,8 +64,56 @@ query user
 ~~~
 
 Scan all local drives for any file with "video" in the name:
-~~~
+~~~powershell
 Get-ChildItem -Path "C:\" -Filter "*video*" -File -Recurse -ErrorAction SilentlyContinue | Select-Object -ExpandProperty FullName
 ~~~
+
+This targets the 64-bit and 32-bit system registration paths. Note that some programs do not supply an absolute InstallDate to the registry.
+~~~powershell
+Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*, HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | 
+Where-Object {$_.DisplayName} | 
+Select-Object DisplayName, DisplayVersion, InstallDate | 
+Sort-Object InstallDate -Descending
+~~~
+
+Event Log Method (Most Accurate for Dates)
+~~~powershell
+Get-WinEvent -ProviderName msiinstaller | 
+Where-Object {$_.Id -eq 1033} | 
+Select-Object TimeCreated, Message | 
+Format-Table -Wrap
+~~~
+
+View Recently Modified or Created Files
+~~~powershell
+Get-ChildItem -Path "C:\" -Recurse -File -ErrorAction SilentlyContinue | 
+Sort-Object LastWriteTime -Descending | 
+Select-Object Name, LastWriteTime, FullName -First 20
+~~~
+
+
+Find Files Created (Instead of Modified) Recently
+~~~powershell
+Get-ChildItem -Path "C:\" -Recurse -File | 
+Sort-Object CreationTime -Descending | 
+Select-Object Name, CreationTime, FullName -First 20
+~~~
+
+Check for Malicious Persistence (Startup & Tasks)
+~~~powershell
+Get-CimInstance Win32_StartupCommand | Select-Object Name, Command, Location | Format-Table -AutoSize
+~~~
+
+List Hidden Active Tasks:
+~~~powershell
+Get-ScheduledTask | Get-ScheduledTaskInfo | Sort-Object LastRunTime -Descending | Select-Object TaskName, LastRunTime | Out-GridView
+~~~
+
+Find Processes Running from Unexpected Folders
+~~~powershell
+Get-Process | Select-Object Name, Id, @{Name="Path"; Expression={$_.Path}} | Where-Object {$_.Path -ne $null} | Sort-Object Name
+~~~
+
+
 
 
