@@ -70,7 +70,7 @@ Get-ChildItem -Path "C:\" -Filter "*video*" -File -Recurse -ErrorAction Silently
 
 Scan all local drives for any file with ".exe" in the name (date included):
 ~~~powershell
-Get-ChildItem -Path "C:\" -Filter "*.exe*" -File -Recurse -ErrorAction SilentlyContinue | Select-Object FullName, LastWriteTime | Sort-Object InstallDate -Descending
+Get-ChildItem -Path "C:\" -Filter "*.exe*" -File -Recurse -ErrorAction SilentlyContinue | Select-Object FullName, LastWriteTime | Sort-Object LastWriteTime -Descending
 ~~~
 
 This targets the 64-bit and 32-bit system registration paths. Note that some programs do not supply an absolute InstallDate to the registry.
