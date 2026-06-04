@@ -1,7 +1,7 @@
 #Antes de usar este codigo sobre una red tener en cuenta que puede hacer que algunas alertas de IDS/EDR/antivirus/etc marquen un trafico inusual ya que hace que escanee toda una red en busqueda de archvivos en carpetas compartidas (net view)
 
 # --- Configuración del Usuario ---
-$red = "10.32.1." # Primeros 3 octetos
+$red = "192.168.1." # Primeros 3 octetos
 $rangoInicio = 1
 $rangoFin = 254
 $extensions = ".txt", ".pdf", ".docx", ".xlsx", ".config", ".sql", ".ps1", ".exe", ".bat"
@@ -12,7 +12,7 @@ $resultadosTotales = @()
 $ping = New-Object System.Net.NetworkInformation.Ping
 
 Write-Host "`n[*] Iniciando Auditoría Profunda: $red$rangoInicio al $red$rangoFin" -ForegroundColor Magenta
-Write-Host "[!] ADVERTENCIA: Este proceso es intrusivo y puede tardar bastante tiempo." -ForegroundColor DarkYellow
+Write-Host "[!] ADVERTENCIA: Este proceso es intrusivo y puede tardar." -ForegroundColor DarkYellow
 
 for ($i = $rangoInicio; $i -le $rangoFin; $i++) {
     $ip = "$red$i"
