@@ -119,6 +119,15 @@ Find Processes Running from Unexpected Folders
 Get-Process | Select-Object Name, Id, @{Name="Path"; Expression={$_.Path}} | Where-Object {$_.Path -ne $null} | Sort-Object Name
 ~~~
 
+Compress a folder to .zip
+~~~powershell
+Compress-Archive -Path "C:\" -DestinationPath "C:\output.zip"
+~~~
+
+
+
+
+
 
 
 
