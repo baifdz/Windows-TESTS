@@ -124,7 +124,21 @@ Compress a folder to .zip
 Compress-Archive -Path "C:\" -DestinationPath "C:\output.zip"
 ~~~
 
-
+Adicion de ruta a variables de entorno
+~~~powershell
+# 1. Definir la ruta del programa
+$ruta = "C:\Program Files\<program.exe>"
+# 2. Añadir al PATH Global (Para todos los usuarios de la maquina)
+$oldPathMachine = [Environment]::GetEnvironmentVariable("Path", "Machine")
+if ($oldPathMachine -notlike "*$ruta*") {
+    [Environment]::SetEnvironmentVariable("Path", "$oldPathMachine;$ruta", "Machine")
+}
+# 3. Añadir al PATH del Usuario Actual
+$oldPathUser = [Environment]::GetEnvironmentVariable("Path", "User")
+if ($oldPathUser -notlike "*$ruta*") {
+    [Environment]::SetEnvironmentVariable("Path", "$oldPathUser;$ruta", "User")
+}
+~~~
 
 
 
