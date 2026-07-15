@@ -140,7 +140,15 @@ if ($oldPathUser -notlike "*$ruta*") {
 }
 ~~~
 
+Certificados instalados
+~~~powershell
+Get-ChildItem -Path Cert:\LocalMachine -Recursor
+~~~
 
+Buscar un certificado específico por su nombre (Subject):
+~~~powershell
+Get-ChildItem -Path Cert:\LocalMachine -Recurse | Where-Object { $_.Subject -like "*NombreDelCertificado*" }
+~~~
 
 
 
