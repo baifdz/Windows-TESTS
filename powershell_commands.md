@@ -150,6 +150,10 @@ Buscar un certificado específico por su nombre (Subject):
 Get-ChildItem -Path Cert:\LocalMachine -Recurse | Where-Object { $_.Subject -like "*NombreDelCertificado*" }
 ~~~
 
+Quitar un certificado
+~~~powershell
+Remove-Item -Path "Cert:\LocalMachine\My\<thumbprint>" -DeleteKey -Verbose
+~~~
 
 
 
