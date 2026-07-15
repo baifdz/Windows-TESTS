@@ -152,8 +152,13 @@ Get-ChildItem -Path Cert:\LocalMachine -Recurse | Where-Object { $_.Subject -lik
 
 Quitar un certificado
 ~~~powershell
-Remove-Item -Path "Cert:\LocalMachine\My\<thumbprint>" -DeleteKey -Verbose
+Get-ChildItem -Path Cert:\CurrentUser -Recurse | 
+    Where-Object { $_.Thumbprint -eq "<thumbprint>" } | 
+    Remove-Item -Verbose
 ~~~
+
+
+
 
 
 
