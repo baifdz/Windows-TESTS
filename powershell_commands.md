@@ -161,6 +161,17 @@ Get-ChildItem -Path Cert:\LocalMachine -Recurse |
     Where-Object { $_.Thumbprint -eq "<thumbprint>" } | 
     Remove-Item -Verbose
 ~~~
+Disable GPS
+~~~powershell
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration" -Name "Status" -Value 0
+Stop-Service -Name "lfsvc" -Force
+
+~~~
+Enable GPS
+~~~powershell
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration" -Name "Status" -Value 1
+Start-Service -Name "lfsvc"
+~~~
 
 
 
