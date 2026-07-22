@@ -173,6 +173,20 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Co
 Start-Service -Name "lfsvc"
 ~~~
 
+Window message response
+~~~PowerShell
+$objeto = New-Object -ComObject WScript.Shell
+$respuesta = $objeto.Popup("¿Puedes asistir a la reunión hoy?", 0, "Pregunta", 4 + 32)
+
+if ($respuesta -eq 6) { 
+    $voto = "SI." 
+} else { 
+    $voto = "NO." 
+}
+
+# Este comando devolvera la ventana flotante con la respuesta
+msg * /server:<IP or HOSTNAME> "El usuario $env:USERNAME respondio: $voto"
+~~~
 
 
 
