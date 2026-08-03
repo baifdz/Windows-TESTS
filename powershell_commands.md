@@ -188,6 +188,22 @@ if ($respuesta -eq 6) {
 msg * /server:<IP or HOSTNAME> "El usuario $env:USERNAME respondio: $voto"
 ~~~
 
+Procesos Vinculados a Apps
+~~~
+Get-Process | Where-Object {$_.Name -match "AnyViewer|IISExpress|java|netbeans|sap"} | Select-Object Name, Id, @{Name="RAM (MB)";Expression={[math]::round(($_.WorkingSet / 1MB),2)}} | Sort-Object "RAM (MB)" -Descending
+~~~
 
+Procesos con mas consumo de RAM
+~~~
+Get-Process | Sort-Object WorkingSet -Descending | Select-Object -First 10 -Property Name, Id, @{Name="RAM (MB)";Expression={[math]::round(($_.WorkingSet / 1MB),2)}}
+~~~
 
+Quitar Permisos de Administrador
+~~~
+Remove-LocalGroupMember -Group "Administradores" -Member "Usuario"
+~~~
+Validar Permisos
+~~~
+Get-LocalGroupMember -Group "Administradores"
+~~~
 
