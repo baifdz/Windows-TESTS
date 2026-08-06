@@ -174,7 +174,7 @@ Start-Service -Name "lfsvc"
 ~~~
 
 Window message response
-~~~PowerShell
+~~~powershell
 $objeto = New-Object -ComObject WScript.Shell
 $respuesta = $objeto.Popup("¿Puedes asistir a la reunión hoy?", 0, "Pregunta", 4 + 32)
 
@@ -189,21 +189,27 @@ msg * /server:<IP or HOSTNAME> "El usuario $env:USERNAME respondio: $voto"
 ~~~
 
 Procesos Vinculados a Apps
-~~~
+~~~powershell
 Get-Process | Where-Object {$_.Name -match "AnyViewer|IISExpress|java|netbeans|sap"} | Select-Object Name, Id, @{Name="RAM (MB)";Expression={[math]::round(($_.WorkingSet / 1MB),2)}} | Sort-Object "RAM (MB)" -Descending
 ~~~
 
 Procesos con mas consumo de RAM
-~~~
+~~~powershell
 Get-Process | Sort-Object WorkingSet -Descending | Select-Object -First 10 -Property Name, Id, @{Name="RAM (MB)";Expression={[math]::round(($_.WorkingSet / 1MB),2)}}
 ~~~
 
 Quitar Permisos de Administrador
-~~~
+~~~powershell
 Remove-LocalGroupMember -Group "Administradores" -Member "Usuario"
 ~~~
 Validar Permisos
-~~~
+~~~powershell
 Get-LocalGroupMember -Group "Administradores"
 ~~~
+
+Pop Up with timer
+~~~powershell
+$wsh.Popup("This window will close automatically in 5 seconds.", 5, "Timed Notification", 0)
+~~~
+
 
