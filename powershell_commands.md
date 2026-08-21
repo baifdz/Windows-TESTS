@@ -213,3 +213,32 @@ $wsh.Popup("This window will close automatically in 5 seconds.", 5, "Timed Notif
 ~~~
 
 
+Show network adapters interfaces 
+~~~powershell
+Get-NetAdapter -IncludeHidden
+~~~
+
+Disable Network Adapter
+~~~powershell
+Disable-NetAdapter -Name "Ethernet" -Confirm:$false
+~~~
+
+Enable Network Adapter
+~~~powershell
+Enable-NetAdapter -Name "Ethernet" -Confirm:$false
+~~~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
