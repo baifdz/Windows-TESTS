@@ -30,6 +30,16 @@ For Windows Store/UWP Apps (Get-AppxPackage): Specifically lists modern "Metro" 
 Get-AppxPackage | Select-Object Name, PackageFullName
 ~~~
 
+Para desinstalar una aplicación específica, se usa el comando con su nombre completo (PackageFullName):
+~~~powershell
+Get-AppxPackage *programa* | Remove-AppxPackage
+~~~
+~~~powershell
+Uninstall-Package -Name "programa"
+~~~
+
+
+
 Get driver info
 ~~~powershell
 Get-NetAdapter
