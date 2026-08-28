@@ -171,6 +171,11 @@ Get-ChildItem -Path Cert:\LocalMachine -Recurse |
     Where-Object { $_.Thumbprint -eq "<thumbprint>" } | 
     Remove-Item -Verbose
 ~~~
+Instalar certificado
+~~~powershell
+Import-Certificate -FilePath "C:\TuCertificado.cer" -CertStoreLocation Cert:\LocalMachine\Root
+~~~~
+
 Disable GPS
 ~~~powershell
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration" -Name "Status" -Value 0
