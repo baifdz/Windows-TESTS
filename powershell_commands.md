@@ -30,6 +30,11 @@ For Windows Store/UWP Apps (Get-AppxPackage): Specifically lists modern "Metro" 
 Get-AppxPackage | Select-Object Name, PackageFullName
 ~~~
 
+Version de windows
+~~~powershell
+$Ver = Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion'; "Windows Version: $($Ver.DisplayVersion) (Build $($Ver.CurrentBuildNumber).$($Ver.UBR))"
+~~~
+
 Para desinstalar una aplicación específica, se usa el comando con su nombre completo (PackageFullName):
 ~~~powershell
 Get-AppxPackage *programa* | Remove-AppxPackage
@@ -37,6 +42,8 @@ Get-AppxPackage *programa* | Remove-AppxPackage
 ~~~powershell
 Uninstall-Package -Name "programa"
 ~~~
+
+
 
 
 
