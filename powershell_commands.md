@@ -244,8 +244,10 @@ Enable-NetAdapter -Name "Ethernet" -Confirm:$false
 ~~~
 
 
-
-
+List letter disks:
+~~~powershell
+Get-PSDrive -PSProvider FileSystem
+~~~
 
 
 
