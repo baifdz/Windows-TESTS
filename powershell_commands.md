@@ -258,6 +258,18 @@ Get-PSDrive -PSProvider FileSystem
 
 
 
+Ask for a web request (universal command for text)
+~~~powershell
+$webclient = New-Object System.Net.WebClient
+$webclient.DownloadString("https://ifconfig.me")
+~~~
+
+Ask for a web request (universal command for download)
+~~~powershell
+$webclient = New-Object System.Net.WebClient
+$webclient.DownloadFile("https://ifconfig.me")
+~~~
+
 
 
 
