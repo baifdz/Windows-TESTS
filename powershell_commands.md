@@ -3,7 +3,7 @@
 
 Claro. Aquí tienes únicamente el índice, manteniendo la numeración de los mismos comandos:
 
-~~~
+
 # Índice — PowerShell: Administración y Diagnóstico de Windows
 
 1. [Forzar la aparición del cuadro "Otro usuario"](#1-forzar-la-aparición-del-cuadro-otro-usuario)
@@ -39,7 +39,6 @@ Claro. Aquí tienes únicamente el índice, manteniendo la numeración de los mi
 31. [List letter disks](#31-list-letter-disks)
 32. [Ask for a web request (universal command for text)](#32-ask-for-a-web-request-universal-command-for-text)
 33. [Ask for a web request (universal command for download)](#33-ask-for-a-web-request-universal-command-for-download)
-~~~
 
 
 ## 1. Forzar la aparición del cuadro "Otro usuario"
