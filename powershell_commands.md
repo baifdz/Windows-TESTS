@@ -364,3 +364,26 @@ $webclient.DownloadString("https://ifconfig.me")
 $webclient = New-Object System.Net.WebClient
 $webclient.DownloadFile("https://ifconfig.me")
 ~~~
+
+## List Directories
+~~~powershell
+Get-ChildItem
+~~~
+## Find text in a file 
+~~~powershell
+Select-String -path c:\users \*.txt -pattern password
+~~~
+
+## Ping sweep in 10.1.2.0/24
+~~~powershell
+1..255 | % {echo "10.1.2.$_"; ping -n 1 -2 100 10.1.2.$_ | SelectString ttl}
+~~~
+
+## Port Scan 
+~~~powershell
+1..1024 | % {echo ((new-object Net.Sockets.TcpClient).Connect ("10.1.2.3",$_)) "Port $_ is Open"} 2>$null
+~~~
+
+
+
+
