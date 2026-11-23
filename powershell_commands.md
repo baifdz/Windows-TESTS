@@ -148,7 +148,7 @@ Scan all local drives for any file with "video" in the name:
 ~~~powershell
 Get-ChildItem -Path "C:\" -Filter "*video*" -File -Recurse -ErrorAction SilentlyContinue | Select-Object -ExpandProperty FullName
 ~~~
-~~~
+~~~powershell
 Get-ChildItem -Path C:\ -Filter *video* -File -Recurse -ErrorAction SilentlyContinue | Select-Object FullName, LastWriteTime, CreationTime, LastAccessTime
 ~~~
 
