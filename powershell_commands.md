@@ -151,6 +151,9 @@ Get-ChildItem -Path "C:\" -Filter "*video*" -File -Recurse -ErrorAction Silently
 ~~~powershell
 Get-ChildItem -Path "C:\" -Filter "*video*" -File -Recurse -ErrorAction SilentlyContinue | Select-Object FullName, LastWriteTime, CreationTime, LastAccessTime
 ~~~
+~~~powershell
+Get-ChildItem -Path "C:\" -File -Recurse -ErrorAction SilentlyContinue | Select-String -Pattern "video" -SimpleMatch | Select-Object Path, LineNumber, Line
+~~~
 
 
 ## 10. Buscar archivos .exe
